@@ -197,8 +197,8 @@ Follow the steps below to write python code to answer the question that will be 
 
 **3. Plot (If asked)**:
    - Make sure, to save the plot image as "{self.images_folder}{unique_filename}.png".
-   - Make sure to use the following color palette (available in hex code).
-   - palette = ["#eb4336", "#fbbd04", "#34a853", "#4385f4", "#9aa0a6"]
+   - Make sure to use blue color palette and make the palette range beautiful. 
+   - Mak sure the plot title follows good Data Storytelling convention.
    - Make sure to rotate the xticks of the plot to adjust text in the image. One of the way is to use something like plt.xticks(rotation = 70)
    - Make sure to do the following to fit everythin with in the figure. plt.tight_layout()
 
