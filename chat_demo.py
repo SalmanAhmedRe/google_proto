@@ -156,18 +156,19 @@ class DemoGoogle:
         return "", "", [], None, False, ""
 
     def chat_stage_1(self, question):
-        # time_sec = time() 
+        time_sec = time() 
         _question, filename = self.prepare_question(question)
-        # print ("Prepare Que", time() - time_sec)
         # print (_question)
         response, status, output = self.get_output(_question)
+        print ("Executed Code in : ", time() - time_sec, "seconds")
         # print (response)
         # print (status)
         # print (output)
-        # time_sec = time()
+        time_sec = time()
         summary, insight, next_questions, filename, direct_plot, output = self.process_output(question, filename, response, status, output)
         # print ("Process Answer in Summary", time() - time_sec)
         summary, isInsight, response, insight = self.refine_summary_based_on_plot_output(summary, response, insight, output, direct_plot)
+        print ("Executed Summarization in : ", time() - time_sec, "seconds")
         
         if filename:
             if summary:
@@ -210,7 +211,9 @@ class DemoGoogle:
     def chat_stage_2(self, input_stage_2):
         insight = input_stage_2["insight"]
         if input_stage_2["isInsight"]:
+            time_sec = time()
             insight_code, filename = self.process_insight(insight)
+            print ("Executed Insight Plot Generation in : ", time() - time_sec, "seconds")
         else:
             insight_code, filename = None, None
         output_stage_2 = {
