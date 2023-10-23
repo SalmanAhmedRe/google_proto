@@ -27,16 +27,26 @@ class ConfigPrompt:
     def update_summary_personal_instructions(self, personalize, personal_information):
         self.personalize = personalize
         if self.personalize:
-            self.instructions_output = self.get_instructions_output_prompt(personal_information)
+            self.instructions_output = self.get_instructions_output_prompt(personal_information = personal_information)
             self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, self.instructions_output)
         else:
             self.instructions_output = self.get_instructions_output_prompt()
             self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, self.instructions_output)
 
-    def update_summary_instructions(self, instructions_output):
+    def update_output_instructions_and_personal_information(self, instructions_output, personalize, personal_information):
+        self.personalize = personalize
+        if self.personalize:
+            self.instructions_output = self.get_instructions_output_prompt(personal_information = personal_information, context_prompt=instructions_output)
+            self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, self.instructions_output)
+        else:
+            self.instructions_output = self.get_instructions_output_prompt(context_prompt=instructions_output)
+            self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, self.instructions_output)
+        
+        
+        
         self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, instructions_output)
 
-    def get_instructions_output_prompt(self, personal_information = ""):
+    def get_instructions_output_prompt(self, personal_information = "", context_prompt = ""):
         """
         Please only add instructions that refines the answer. (Do not add instructions that require additional code generation)
         """
@@ -49,7 +59,8 @@ Output format (Return a JSON object as follows):
 "next_questions" : ```List of 3 next most relevant questions to ask based on the question asked.```
 }
 """
-        context_prompt = """
+        if context_prompt == "":
+            context_prompt = """
 Please consider the following points for summarizing the output:
 - The answers you provide should be concise, but also give explanation and elaborate on why the answers are so.
 - The answers you provide should give a good narrative.
