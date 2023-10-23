@@ -42,10 +42,6 @@ class ConfigPrompt:
             self.instructions_output = self.get_instructions_output_prompt(context_prompt=instructions_output)
             self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, self.instructions_output)
         
-        
-        
-        self.summarise_prompt = self.prepare_system_prompt(self.summarise_system_prompt, instructions_output)
-
     def get_instructions_output_prompt(self, personal_information = "", context_prompt = ""):
         """
         Please only add instructions that refines the answer. (Do not add instructions that require additional code generation)
