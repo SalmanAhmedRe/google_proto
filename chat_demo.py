@@ -160,7 +160,7 @@ class DemoGoogle:
         _question, filename = self.prepare_question(question)
         # print (_question)
         response, status, output = self.get_output(_question)
-        print ("Executed Code in : ", time() - time_sec, "seconds")
+        print ("Prompted GPT-4 and Code in : ", time() - time_sec, "seconds")
         # print (response)
         # print (status)
         # print (output)
@@ -168,7 +168,7 @@ class DemoGoogle:
         summary, insight, next_questions, filename, direct_plot, output = self.process_output(question, filename, response, status, output)
         # print ("Process Answer in Summary", time() - time_sec)
         summary, isInsight, response, insight = self.refine_summary_based_on_plot_output(summary, response, insight, output, direct_plot)
-        print ("Executed Summarization in : ", time() - time_sec, "seconds")
+        print ("Prompted GPT-4 and summarized/phrased answer in : ", time() - time_sec, "seconds")
         
         if filename:
             if summary:
